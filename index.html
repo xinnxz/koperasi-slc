@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOKAL CIANJUR - Supplier Buah & Sayur Premium Cianjur</title>
+    <meta name="description" content="Supplier buah dan sayur premium di Cianjur. Mitra terpercaya untuk restoran, katering, dan program MBG. Kualitas terbaik, pengiriman tepat waktu.">
+    <meta name="keywords" content="supplier sayur cianjur, supplier buah cianjur, MBG cianjur, sayuran segar, buah import">
+    <meta property="og:title" content="LOKAL CIANJUR - Supplier Buah & Sayur Premium">
+    <meta property="og:description" content="Mitra terbaik untuk kebutuhan buah dan sayuran premium di Cianjur.">
+    <meta property="og:type" content="website">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brand: { yellow: '#FFC107', orange: '#FB8C00', navy: '#1B263B', light: '#FFFBF0' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FAFAFA; overflow-x: hidden; }
+        .dark body { background-color: #0f172a; }
+        .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); }
+        .dark .glass { background: rgba(15,23,42,0.8); border-color: rgba(255,255,255,0.1); }
+        .glass-dark { background: rgba(27,38,59,0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .text-gradient { background: linear-gradient(135deg, #FB8C00, #FFC107); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Preloader */
+        .preloader { position:fixed; inset:0; background:#1B263B; z-index:9999; display:flex; align-items:center; justify-content:center; transition: opacity 0.5s; }
+        .preloader.hidden { opacity:0; pointer-events:none; }
+        .loader { width:50px; height:50px; border:4px solid #FFC107; border-top-color:transparent; border-radius:50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to{transform:rotate(360deg)} }
+        
+        /* Mobile Menu */
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+        .mobile-menu.open { transform: translateX(0); }
+        
+        /* Counter Animation */
+        .counter { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="text-gray-800 dark:text-gray-200 antialiased">
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Background Blobs -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-brand-yellow/20 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-brand-orange/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 glass dark:bg-slate-900/80">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="LOKAL CIANJUR" class="w-10 h-10 object-contain">
+                <span class="font-serif font-bold text-xl text-brand-navy dark:text-white">LOKAL CIANJUR</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-600 dark:text-gray-300">
+                <a href="#home" class="hover:text-brand-orange transition">Beranda</a>
+                <a href="#layanan" class="hover:text-brand-orange transition">Layanan</a>
+                <a href="#mbg" class="hover:text-brand-orange transition">Program MBG</a>
+                <a href="#testimoni" class="hover:text-brand-orange transition">Testimoni</a>
+                <a href="#faq" class="hover:text-brand-orange transition">FAQ</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <!-- Dark Mode Toggle -->
+                <button id="darkToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 transition">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                    <i data-lucide="moon" class="w-5 h-5 dark:hidden text-gray-600"></i>
+                </button>
+                
+                <a href="#kontak" class="hidden md:flex bg-brand-navy dark:bg-brand-orange text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition shadow-lg items-center gap-2">
+                    Pesan Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="menuBtn" class="md:hidden p-2">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-64 h-full bg-white dark:bg-slate-900 z-50 shadow-2xl p-6">
+        <button id="closeMenu" class="absolute top-4 right-4"><i data-lucide="x" class="w-6 h-6"></i></button>
+        <div class="mt-12 flex flex-col gap-4 font-medium">
+            <a href="#home" class="py-2 hover:text-brand-orange">Beranda</a>
+            <a href="#layanan" class="py-2 hover:text-brand-orange">Layanan</a>
+            <a href="#mbg" class="py-2 hover:text-brand-orange">Program MBG</a>
+            <a href="#testimoni" class="py-2 hover:text-brand-orange">Testimoni</a>
+            <a href="#faq" class="py-2 hover:text-brand-orange">FAQ</a>
+            <a href="#kontak" class="mt-4 bg-brand-navy text-white px-6 py-3 rounded-full text-center font-semibold">Hubungi Kami</a>
+        </div>
+    </div>
+    <div id="menuOverlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="relative z-10">
+                <div data-aos="fade-up" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm mb-6">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-xs font-bold tracking-wider text-gray-500 dark:text-gray-400 uppercase">Supplier Terpercaya Cianjur</span>
+                </div>
+                
+                <h1 data-aos="fade-up" data-aos-delay="100" class="font-serif text-5xl lg:text-7xl font-bold leading-[1.1] mb-6 text-brand-navy dark:text-white">
+                    Kesegaran Alam <br><span class="text-gradient">Langsung Diantar.</span>
+                </h1>
+                
+                <p data-aos="fade-up" data-aos-delay="200" class="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed max-w-lg">
+                    Mitra terbaik untuk kebutuhan buah dan sayuran import maupun lokal. Kualitas premium untuk bisnis, acara, dan program pemerintah.
+                </p>
+
+                <div data-aos="fade-up" data-aos-delay="300" class="flex flex-col sm:flex-row gap-4">
+                    <a href="#kontak" class="bg-brand-navy dark:bg-brand-orange text-white px-8 py-4 rounded-full font-semibold shadow-xl hover:scale-105 transition transform text-center">Hubungi Kami</a>
+                    <a href="#layanan" class="glass dark:bg-slate-800 text-brand-navy dark:text-white px-8 py-4 rounded-full font-semibold hover:bg-white dark:hover:bg-slate-700 transition text-center border border-gray-200 dark:border-slate-600">Lihat Katalog</a>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="400" class="mt-12 flex items-center gap-4 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <div class="flex -space-x-3">
+                        <img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=1" alt="User">
+                        <img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=3" alt="User">
+                        <img class="w-10 h-10 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=4" alt="User">
+                    </div>
+                    <p>Dipercaya oleh <span class="text-brand-navy dark:text-white font-bold">50+ Resto & Instansi</span></p>
+                </div>
+            </div>
+
+            <div class="relative z-10 hidden lg:block" data-aos="zoom-out" data-aos-duration="1000">
+                <div class="relative rounded-[3rem] overflow-hidden shadow-2xl animate-float border-[8px] border-white/50 dark:border-slate-700/50">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fresh Vegetables" class="w-full h-auto object-cover hover:scale-110 transition duration-700">
+                    <div class="absolute bottom-8 left-8 glass p-4 rounded-2xl shadow-lg flex items-center gap-4">
+                        <div class="bg-green-100 p-3 rounded-full text-green-600"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-semibold uppercase">Status Stok</p>
+                            <p class="text-brand-navy dark:text-white font-bold">100% Segar Hari Ini</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white dark:bg-slate-800/50">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8" data-aos="fade-up">
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-brand-orange counter" data-target="50">0</div>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">Klien Aktif</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-brand-orange counter" data-target="1000">0</div>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">Pengiriman/Bulan</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-brand-orange counter" data-target="5">0</div>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">Tahun Pengalaman</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-brand-orange counter" data-target="100">0</div>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">% Kepuasan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MBG Section -->
+    <section id="mbg" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="bg-brand-navy rounded-[3rem] p-10 md:p-20 text-white relative overflow-hidden shadow-2xl" data-aos="fade-up">
+                <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-orange rounded-full blur-[80px] opacity-40"></div>
+
+                <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="inline-block bg-brand-orange/20 text-brand-orange border border-brand-orange/50 px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-4">PROGRAM PEMERINTAH</div>
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6">Menerima Pesanan <br><span class="text-brand-yellow">Makan Bergizi Gratis</span></h2>
+                        <p class="text-gray-300 text-lg mb-8 leading-relaxed">Kami berkomitmen mendukung program nasional dengan menyuplai bahan pangan bergizi, segar, dan higienis.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3"><i data-lucide="shield-check" class="text-brand-yellow"></i><span>Standar Kebersihan Terjamin</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="truck" class="text-brand-yellow"></i><span>Pengiriman Tepat Waktu</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="file-check" class="text-brand-yellow"></i><span>Administrasi Lengkap & Resmi</span></li>
+                        </ul>
+                    </div>
+                    <div class="relative">
+                        <div class="glass-dark p-8 rounded-3xl border border-white/10 transform rotate-3 hover:rotate-0 transition duration-500">
+                            <div class="flex items-start justify-between mb-6">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Paket Contoh</p>
+                                    <h4 class="text-2xl font-bold">Paket Sayur Sehat</h4>
+                                </div>
+                                <span class="bg-green-500 text-xs font-bold px-2 py-1 rounded text-white">READY</span>
+                            </div>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="bg-white/10 px-3 py-1 rounded-full text-sm">🥦 Brokoli</span>
+                                <span class="bg-white/10 px-3 py-1 rounded-full text-sm">🥕 Wortel</span>
+                                <span class="bg-white/10 px-3 py-1 rounded-full text-sm">🥔 Kentang</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="layanan" class="py-24 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="font-serif text-4xl font-bold text-brand-navy dark:text-white mb-4">Pilihan Kualitas Terbaik</h2>
+                <p class="text-gray-500 dark:text-gray-400">Kami memilah setiap produk dengan ketat untuk memastikan hanya yang terbaik.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 relative group overflow-hidden rounded-3xl h-80 shadow-lg cursor-pointer" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Sayuran">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                        <h3 class="text-white text-2xl font-bold mb-1">Sayuran Lokal Cianjur</h3>
+                        <p class="text-gray-300">Langsung dari petani lokal terbaik.</p>
+                    </div>
+                </div>
+
+                <div class="md:row-span-2 relative group overflow-hidden rounded-3xl h-full min-h-[320px] shadow-lg cursor-pointer" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Buah">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-8 flex flex-col justify-end">
+                        <h3 class="text-white text-2xl font-bold mb-1">Buah Import</h3>
+                        <p class="text-gray-300">Apel, Anggur, Pir Kualitas Premium.</p>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-3xl h-64 shadow-lg cursor-pointer bg-brand-yellow flex items-center justify-center p-8" data-aos="fade-up">
+                    <div class="text-center z-10">
+                        <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-md">🚚</div>
+                        <h3 class="text-brand-navy text-xl font-bold">Siap Antar</h3>
+                        <p class="text-brand-navy/80 text-sm mt-2">Wilayah Cianjur & Sekitarnya</p>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-3xl h-64 shadow-lg cursor-pointer bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 flex flex-col justify-center p-8" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-brand-navy dark:text-white text-4xl font-serif font-bold mb-2">24/7</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Layanan pemesanan selalu buka untuk kebutuhan mendesak Anda.</p>
+                    <a href="#kontak" class="mt-4 flex items-center gap-2 text-brand-orange font-bold text-sm">Hubungi Admin <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimoni" class="py-24 bg-gray-50 dark:bg-slate-800/30">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="font-serif text-4xl font-bold text-brand-navy dark:text-white mb-4">Apa Kata Mereka?</h2>
+                <p class="text-gray-500 dark:text-gray-400">Testimoni dari klien yang sudah mempercayai kami.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg" data-aos="fade-up">
+                    <div class="flex gap-1 text-brand-yellow mb-4">
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">"Kualitas sayuran selalu segar dan pengiriman tepat waktu. Sangat membantu bisnis katering kami!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://i.pravatar.cc/100?img=10" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <p class="font-bold text-brand-navy dark:text-white">Bu Dewi</p>
+                            <p class="text-sm text-gray-500">Katering Berkah Jaya</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex gap-1 text-brand-yellow mb-4">
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">"Sudah 2 tahun berlangganan. Harga bersaing dan kualitas konsisten. Recommended!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://i.pravatar.cc/100?img=12" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <p class="font-bold text-brand-navy dark:text-white">Pak Hendra</p>
+                            <p class="text-sm text-gray-500">RM Sari Rasa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex gap-1 text-brand-yellow mb-4">
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">"Partner terbaik untuk program MBG sekolah kami. Profesional dan amanah!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://i.pravatar.cc/100?img=15" class="w-12 h-12 rounded-full" alt="Client">
+                        <div>
+                            <p class="font-bold text-brand-navy dark:text-white">Ibu Siti</p>
+                            <p class="text-sm text-gray-500">SDN 1 Cianjur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="font-serif text-4xl font-bold text-brand-navy dark:text-white mb-4">Pertanyaan Umum</h2>
+                <p class="text-gray-500 dark:text-gray-400">Jawaban untuk pertanyaan yang sering ditanyakan.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4" data-aos="fade-up">
+                <div class="faq-item border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 text-left font-semibold text-brand-navy dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition">
+                        <span>Apa saja produk yang tersedia?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-gray-600 dark:text-gray-400">
+                        Kami menyediakan berbagai sayuran lokal (wortel, brokoli, bayam, kangkung, dll), buah-buahan import (apel, anggur, pir, jeruk), dan buah lokal berkualitas.
+                    </div>
+                </div>
+
+                <div class="faq-item border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 text-left font-semibold text-brand-navy dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition">
+                        <span>Bagaimana cara pemesanan?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-gray-600 dark:text-gray-400">
+                        Anda bisa menghubungi kami via WhatsApp ke nomor yang tertera. Sampaikan kebutuhan Anda, dan kami akan memberikan penawaran harga terbaik.
+                    </div>
+                </div>
+
+                <div class="faq-item border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 text-left font-semibold text-brand-navy dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition">
+                        <span>Apakah bisa pengiriman ke luar Cianjur?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-gray-600 dark:text-gray-400">
+                        Ya, kami melayani pengiriman ke wilayah sekitar Cianjur seperti Sukabumi, Bogor, dan Bandung dengan minimum order tertentu.
+                    </div>
+                </div>
+
+                <div class="faq-item border border-gray-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 text-left font-semibold text-brand-navy dark:text-white hover:bg-gray-50 dark:hover:bg-slate-800 transition">
+                        <span>Berapa minimum order?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-gray-600 dark:text-gray-400">
+                        Untuk pengiriman dalam kota Cianjur, tidak ada minimum order. Untuk luar kota, minimum order Rp 500.000.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontak" class="relative py-24 bg-gray-900 overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover opacity-30">
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto glass-dark rounded-[2rem] p-8 md:p-12 text-center border border-white/10 shadow-2xl" data-aos="zoom-in">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Mulai Kerjasama Sekarang</h2>
+                <p class="text-gray-300 text-lg mb-10">Dapatkan penawaran harga khusus untuk restoran, katering, atau program pemerintah.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-10">
+                    <a href="https://wa.me/6282115925173" class="group bg-white hover:bg-brand-yellow transition duration-300 p-6 rounded-2xl flex items-center gap-4 text-left shadow-lg">
+                        <div class="bg-gray-100 group-hover:bg-white/50 p-3 rounded-full transition">
+                            <i data-lucide="phone" class="text-brand-navy w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Admin 1 (Kia)</p>
+                            <p class="text-brand-navy font-bold text-xl">0821 1592 5173</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://wa.me/6285157724302" class="group bg-white hover:bg-brand-orange hover:text-white transition duration-300 p-6 rounded-2xl flex items-center gap-4 text-left shadow-lg">
+                        <div class="bg-gray-100 group-hover:bg-white/20 p-3 rounded-full transition">
+                            <i data-lucide="phone" class="text-brand-navy w-6 h-6"></i>
+                        </div>
+                        <div class="group-hover:text-white text-gray-800">
+                            <p class="text-xs opacity-70 uppercase font-bold tracking-wider">Admin 2 (Manap)</p>
+                            <p class="font-bold text-xl">0851 5772 4302</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-2 text-gray-400 text-sm mb-8">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    <span>Jl. Pasir Gede Raya, Dekat IGD RS Sayang, Cianjur, 43216</span>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.6389067!2d107.1383!3d-6.8183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68b1e6e0c0c0c1%3A0x0!2sRS%20Sayang%20Cianjur!5e0!3m2!1sid!2sid!4v1703176800000!5m2!1sid!2sid"
+                        width="100%" 
+                        height="300" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full">
+                    </iframe>
+                </div>
+                
+                <a href="https://maps.google.com/?q=-6.8183,107.1383" target="_blank" class="inline-flex items-center gap-2 mt-6 text-brand-yellow hover:text-brand-orange transition font-semibold">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    Buka di Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 border-t border-white/10">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="LOKAL CIANJUR" class="w-10 h-10 object-contain">
+                <span class="text-2xl font-serif font-bold tracking-wider">LOKAL CIANJUR</span>
+            </div>
+            <div class="text-gray-500 text-sm">© 2025 Fresh Supplier. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/6282115925173" target="_blank" class="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform" title="Chat WhatsApp">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 right-24 z-40 bg-brand-navy dark:bg-brand-orange text-white p-3 rounded-full shadow-xl opacity-0 invisible hover:scale-110 transition-all" title="Ke Atas">
+        <i data-lucide="chevron-up" class="w-6 h-6"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize
+        lucide.createIcons();
+        AOS.init({ duration: 800, once: true, offset: 100 });
+
+        // Preloader
+        window.addEventListener('load', () => {
+            document.getElementById('preloader').classList.add('hidden');
+        });
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('open');
+            menuOverlay.classList.toggle('hidden');
+        }
+        menuBtn.addEventListener('click', toggleMenu);
+        closeMenu.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
+
+        // Dark Mode
+        const darkToggle = document.getElementById('darkToggle');
+        const html = document.documentElement;
+        if (localStorage.theme === 'dark') html.classList.add('dark');
+        
+        darkToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+            lucide.createIcons();
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.dataset.target;
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.ceil(current) + '+';
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target + '+';
+                        }
+                    };
+                    updateCounter();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('svg');
+                content.classList.toggle('hidden');
+                icon.style.transform = content.classList.contains('hidden') ? '' : 'rotate(180deg)';
+            });
+        });
+    </script>
+</body>
+</html>
