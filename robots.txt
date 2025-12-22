@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block unnecessary files from crawling
+Disallow: /.git/
+
+# Sitemap location
+Sitemap: https://koperasi-slc.com/sitemap.xml

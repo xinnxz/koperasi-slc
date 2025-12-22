@@ -1,0 +1,26 @@
+{
+  "name": "Koperasi SLC - Supplier Buah & Sayur Premium",
+  "short_name": "Koperasi SLC",
+  "description": "Supplier buah dan sayur premium di Cianjur. Mitra terpercaya untuk restoran, katering, dan program MBG.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAFA",
+  "theme_color": "#1B263B",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/logo-bg.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/logo-bg.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "food"],
+  "lang": "id"
+}
