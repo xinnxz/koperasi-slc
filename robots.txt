@@ -5,4 +5,4 @@ Allow: /
 Disallow: /.git/
 
 # Sitemap location
-Sitemap: https://koperasi-slc.com/sitemap.xml
+Sitemap: https://koperasislc.xyz/sitemap.xml
